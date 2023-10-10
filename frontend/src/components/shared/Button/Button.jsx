@@ -18,4 +18,4 @@ const Button = ({ text, onClick }) => {
 };
 export default Button;
 
-//we can insert onclick as eventlistner and onclick is the method which is 
+//we can insert onclick as eventlistner and second onclick is the method which is called and this method recives as the prop in Button function.
