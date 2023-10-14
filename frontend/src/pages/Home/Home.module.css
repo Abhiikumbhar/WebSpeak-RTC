@@ -3,6 +3,7 @@
     line-height: 1.6;
     color: #c4c5c5;
     margin-bottom: 30px;
+    display: flex;
 }
 
 .cardWrapper {
@@ -15,4 +16,8 @@
 .hasInvite {
     margin-top: 20px;
     color: #0077ff;
+}
+
+.signinWrapper{
+    margin-top: 20px;
 }

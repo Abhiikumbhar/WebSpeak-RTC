@@ -1,4 +1,4 @@
-import React from 'react';
+import React from 'react'; //This line imports the React library.
 
 const StepPhoneEmail = ({ onNext }) => {
     return (
@@ -13,3 +13,4 @@ export default StepPhoneEmail;
 
 // in this code <>  </> it is called single parent
 //onNext is one function which is pass in to StepPhoneEmail.
+//const StepPhoneEmail = ({ onNext }) => { - This line defines a React component called StepPhoneEmail

@@ -14,7 +14,7 @@ const Home = () => {
 
     const navigate = useNavigate();
     function startRegister() {
-        navigate.push('/register');
+        navigate('/register');
     }
     return (
         <div className={styles.cardWrapper}>
@@ -28,10 +28,13 @@ const Home = () => {
                 </p>
 
                 <div>
-                    <Button onClick={startRegister} text="Get your username" />
+                    <Link style={signInLinkStyle} to="/register">
+                        <Button onClick={startRegister} text="Get your username" />
+                    </Link>
+                    
                 </div>
 
-                <div>
+                <div className={styles.signinWrapper}>
 
                     <span className={styles.hasInvite}>
                         Have an invite text?
@@ -56,7 +59,7 @@ export default Home;
 
 // or in inline css we can pass the parameter as a string... 
 
-//<Button onClick={startRegister} text="Get your username" />- in this sentence sartRegister is the function and it is called in onlick action...
+//<Button onClick={startRegister} text="Get your username" />- in this sentence sartRegister is the function and it is called in onlick action which is present in button.jsx... and here button is the component
 
 //onClick={startRegister} this function we get as a prop from Button.jsx
 
