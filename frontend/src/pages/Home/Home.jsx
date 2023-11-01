@@ -1,6 +1,6 @@
 import React from 'react';
 import styles from './Home.module.css';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link, Navigate} from 'react-router-dom';
 import Card from '../../components/shared/Card/Card';
 import Button from '../../components/shared/Button/Button';
 
@@ -11,10 +11,9 @@ const Home = () => {
         textDecoration: 'none',
         marginLeft: '10px',
     };
-
-    const navigate = useNavigate();
+    const history = Navigate();
     function startRegister() {
-        navigate('/register');
+        Navigate('/authenticate');
     }
     return (
         <div className={styles.cardWrapper}>
@@ -28,10 +27,7 @@ const Home = () => {
                 </p>
 
                 <div>
-                    <Link style={signInLinkStyle} to="/register">
-                        <Button onClick={startRegister} text="Get your username" />
-                    </Link>
-                    
+                    <Button onClick={startRegister} text="Let's Go" />
                 </div>
 
                 <div className={styles.signinWrapper}>
@@ -39,11 +35,6 @@ const Home = () => {
                     <span className={styles.hasInvite}>
                         Have an invite text?
                     </span>
-
-                    <Link style={signInLinkStyle} to="/login">
-                        Sign in
-                    </Link>
-
                 </div>
 
             </Card>
@@ -53,16 +44,3 @@ const Home = () => {
 };
 
 export default Home;
-
-
-// on this page [const signInLinkStyle] this is object for styling link component..
-
-// or in inline css we can pass the parameter as a string... 
-
-//<Button onClick={startRegister} text="Get your username" />- in this sentence sartRegister is the function and it is called in onlick action which is present in button.jsx... and here button is the component
-
-//onClick={startRegister} this function we get as a prop from Button.jsx
-
-//for redirecting history hock is used and it get in the router dom
-
-//const history = useHistory(); --- from this statement history can be redirect into the function
