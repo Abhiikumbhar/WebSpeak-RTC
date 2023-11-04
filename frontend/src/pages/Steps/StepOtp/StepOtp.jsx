@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+ import React, { useState } from 'react';
 import Card from '../../../components/shared/Card/Card';
 import TextInput from '../../../components/shared/TextInput/TextInput';
 import Button from '../../../components/shared/Button/Button';
@@ -15,6 +15,7 @@ const StepOtp = () => {
     async function submit() {
         try {
             const { data } = await verifyOtp({ otp, phone, hash });
+            console.log(data);
             dispatch(setAuth(data));
         } catch (err) {
             console.log(err);

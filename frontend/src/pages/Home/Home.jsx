@@ -11,9 +11,9 @@ const Home = () => {
         textDecoration: 'none',
         marginLeft: '10px',
     };
-    const history = Navigate();
+    const navigate = Navigate();
     function startRegister() {
-        Navigate('/authenticate');
+        navigate('/authenticate');
     }
     return (
         <div className={styles.cardWrapper}>
@@ -21,8 +21,8 @@ const Home = () => {
             <Card title="Welcome to Codershouse!" icon="logo">
 
                 <p className={styles.text}>
-                    We’re working hard to get Codershouse ready for everyone!
-                    While we wrap up the finishing youches, we’re adding people
+                    We’re working hard to get WebSpeak Environment ready for everyone!
+                    While we wrap up the finishing touches, we’re adding people
                     gradually to make sure nothing breaks
                 </p>
 

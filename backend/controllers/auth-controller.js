@@ -19,10 +19,11 @@ class AuthController{
         const hash = hashService.hashOtp(data);
 
         try{
-            await otpService.sendBySms(phone, otp);
+            // await otpService.sendBySms(phone, otp);   //this line commented only for sending otp on dummy number after testing we should uncomment this line
             return res.json({
                 hash: `${hash}.${expires}`,
-                phone
+                phone,
+                otp
             });
         }catch(err){
             console.log(err);
@@ -64,13 +65,18 @@ class AuthController{
             activated: false,
         });
 
+        await tokenService.storeRefreshToken(refreshToken, user._id);
         res.cookie('refreshToken', refreshToken, {
+            maxAge: 1000 * 60 * 60 * 24 * 30,
+            httpOnly: true,
+        });
+        res.cookie('accessToken', accessToken, {
             maxAge: 1000 * 60 * 60 * 24 * 30,
             httpOnly: true,
         });
 
         const userDto = new UserDto(user);
-        res.json({ accessToken, user: userDto });
+        res.json({ user: userDto, auth: true});
     }
 }
 

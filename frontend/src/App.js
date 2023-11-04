@@ -9,13 +9,14 @@ import Rooms from './pages/Rooms/Rooms';
 import { useSelector } from 'react-redux';
 
 function App() {
+    
+    const isAuth = false;
+    const user = { activated : false};
+    // const { user, isAuth } = useSelector((state) => state.auth);
     return (
         <BrowserRouter>
-
             <Navigation />
-
-            <Routes>
-                
+            {/* <Routes>                
                 <GuestRoute path="/" exact>
                     <Home />
                 </GuestRoute>
@@ -31,31 +32,74 @@ function App() {
                 <ProtectedRoute path="/rooms">
                     <Rooms />
                 </ProtectedRoute>
-
-            </Routes>
-            
+            </Routes> */}
+            {
+                isAuth ? (
+                    <Routes>
+                        <Route path='/rooms' Component={Rooms}></Route>
+                        {/* <Route path="*" element={<Navigate to={"/rooms"}/>}/> */}
+                    </Routes>
+                ) : (
+                    <Routes>
+                        <Route path='/authenticate' Component={Authenticate}></Route>
+                        <Route path='/' Component={<Home />} exact></Route>
+                    </Routes>
+                )
+            }
+            {
+                !isAuth ?(
+                    <Routes>
+                        <Route path='/' Component={Home} exact></Route>
+                    </Routes>
+                ) : isAuth && !user.activated ? (
+                    <Routes>
+                        <Route path='/activate' Component={Activate}></Route>
+                    </Routes>
+                ):(
+                    <Routes>
+                        <Route path='/rooms' Component={Rooms}></Route>
+                    </Routes>
+                )
+            }
+            {
+                !isAuth ?(
+                    <Routes>
+                        <Route path='/' Component={Home}></Route>
+                    </Routes>
+                ):isAuth && !user.activated ? (
+                    <Routes>
+                        <Route path='/activate' Component={Activate}></Route>
+                    </Routes>
+                ):(
+                    <Routes>
+                        <Route path='/rooms' Component={Rooms}></Route>
+                    </Routes>
+                )
+            }
         </BrowserRouter>
     );
-} ;// GuestRoute SemiprotecteRoute this are the components
+};// GuestRoute SemiprotecteRoute this are the components
 
 const GuestRoute = ({ children, ...rest }) => {
     const { isAuth } = useSelector((state) => state.auth);
     return (
-        <Route
-            {...rest}
-            render={({ location }) => {
-                return isAuth ? (
-                    <Navigate
-                        to={{
-                            pathname: '/rooms',
-                            state: { from: location },
-                        }}
-                    />
-                ) : (
-                    children
-                );
-            }}
-        ></Route>
+        <Routes>
+            <Route
+                {...rest}
+                render={({ location }) => {
+                    return isAuth ? (
+                        <Navigate
+                            to={{
+                                pathname: '/rooms',
+                                state: { from: location },
+                            }}
+                        />
+                    ) : (
+                        children
+                    );
+                }}
+            ></Route>
+        </Routes>
     );
 }; // in this code childrean and rest are the props
 //Props in JavaScript are a way to pass data from one component to another.
