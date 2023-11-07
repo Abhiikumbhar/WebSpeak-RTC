@@ -1,109 +1,54 @@
 import './App.css';
-import React from 'react';
-import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
-import Home from './pages/Home/Home.jsx';
-import Navigation from './components/shared/Navigation/navigation.jsx';
+import { BrowserRouter, Switch, Route, Redirect } from 'react-router-dom';
+import Home from './pages/Home/Home';
+import Navigation from './components/shared/Navigation/navigation';
 import Authenticate from './pages/Authenticate/Authenticate';
 import Activate from './pages/Activate/Activate';
 import Rooms from './pages/Rooms/Rooms';
 import { useSelector } from 'react-redux';
 
 function App() {
-    
-    const isAuth = false;
-    const user = { activated : false};
-    // const { user, isAuth } = useSelector((state) => state.auth);
     return (
         <BrowserRouter>
             <Navigation />
-            {/* <Routes>                
+            <Switch>
                 <GuestRoute path="/" exact>
                     <Home />
                 </GuestRoute>
-
                 <GuestRoute path="/authenticate">
                     <Authenticate />
                 </GuestRoute>
-
                 <SemiProtectedRoute path="/activate">
                     <Activate />
                 </SemiProtectedRoute>
-
                 <ProtectedRoute path="/rooms">
                     <Rooms />
                 </ProtectedRoute>
-            </Routes> */}
-            {
-                isAuth ? (
-                    <Routes>
-                        <Route path='/rooms' Component={Rooms}></Route>
-                        {/* <Route path="*" element={<Navigate to={"/rooms"}/>}/> */}
-                    </Routes>
-                ) : (
-                    <Routes>
-                        <Route path='/authenticate' Component={Authenticate}></Route>
-                        <Route path='/' Component={<Home />} exact></Route>
-                    </Routes>
-                )
-            }
-            {
-                !isAuth ?(
-                    <Routes>
-                        <Route path='/' Component={Home} exact></Route>
-                    </Routes>
-                ) : isAuth && !user.activated ? (
-                    <Routes>
-                        <Route path='/activate' Component={Activate}></Route>
-                    </Routes>
-                ):(
-                    <Routes>
-                        <Route path='/rooms' Component={Rooms}></Route>
-                    </Routes>
-                )
-            }
-            {
-                !isAuth ?(
-                    <Routes>
-                        <Route path='/' Component={Home}></Route>
-                    </Routes>
-                ):isAuth && !user.activated ? (
-                    <Routes>
-                        <Route path='/activate' Component={Activate}></Route>
-                    </Routes>
-                ):(
-                    <Routes>
-                        <Route path='/rooms' Component={Rooms}></Route>
-                    </Routes>
-                )
-            }
+            </Switch>
         </BrowserRouter>
     );
-};// GuestRoute SemiprotecteRoute this are the components
+}
 
 const GuestRoute = ({ children, ...rest }) => {
     const { isAuth } = useSelector((state) => state.auth);
     return (
-        <Routes>
-            <Route
-                {...rest}
-                render={({ location }) => {
-                    return isAuth ? (
-                        <Navigate
-                            to={{
-                                pathname: '/rooms',
-                                state: { from: location },
-                            }}
-                        />
-                    ) : (
-                        children
-                    );
-                }}
-            ></Route>
-        </Routes>
+        <Route
+            {...rest}
+            render={({ location }) => {
+                return isAuth ? (
+                    <Redirect
+                        to={{
+                            pathname: '/rooms',
+                            state: { from: location },
+                        }}
+                    />
+                ) : (
+                    children
+                );
+            }}
+        ></Route>
     );
-}; // in this code childrean and rest are the props
-//Props in JavaScript are a way to pass data from one component to another.
-//render is the one type of the method
+};
 
 const SemiProtectedRoute = ({ children, ...rest }) => {
     const { user, isAuth } = useSelector((state) => state.auth);
@@ -112,7 +57,7 @@ const SemiProtectedRoute = ({ children, ...rest }) => {
             {...rest}
             render={({ location }) => {
                 return !isAuth ? (
-                    <Navigate
+                    <Redirect
                         to={{
                             pathname: '/',
                             state: { from: location },
@@ -121,7 +66,7 @@ const SemiProtectedRoute = ({ children, ...rest }) => {
                 ) : isAuth && !user.activated ? (
                     children
                 ) : (
-                    <Navigate
+                    <Redirect
                         to={{
                             pathname: '/rooms',
                             state: { from: location },
@@ -131,7 +76,7 @@ const SemiProtectedRoute = ({ children, ...rest }) => {
             }}
         ></Route>
     );
-}; //Redirect Component basically teks the object
+};
 
 const ProtectedRoute = ({ children, ...rest }) => {
     const { user, isAuth } = useSelector((state) => state.auth);
@@ -140,14 +85,14 @@ const ProtectedRoute = ({ children, ...rest }) => {
             {...rest}
             render={({ location }) => {
                 return !isAuth ? (
-                    <Navigate
+                    <Redirect
                         to={{
                             pathname: '/',
                             state: { from: location },
                         }}
                     />
                 ) : isAuth && !user.activated ? (
-                    <Navigate
+                    <Redirect
                         to={{
                             pathname: '/activate',
                             state: { from: location },

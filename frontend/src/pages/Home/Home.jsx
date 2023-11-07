@@ -1,6 +1,6 @@
 import React from 'react';
 import styles from './Home.module.css';
-import { Link, Navigate} from 'react-router-dom';
+import { Link, useHistory } from 'react-router-dom';
 import Card from '../../components/shared/Card/Card';
 import Button from '../../components/shared/Button/Button';
 
@@ -11,34 +11,27 @@ const Home = () => {
         textDecoration: 'none',
         marginLeft: '10px',
     };
-    const navigate = Navigate();
+    const history = useHistory();
     function startRegister() {
-        navigate('/authenticate');
+        history.push('/authenticate');
     }
     return (
         <div className={styles.cardWrapper}>
-
-            <Card title="Welcome to Codershouse!" icon="logo">
-
+            <Card title="Welcome to WebSpeak!" icon="logo">
                 <p className={styles.text}>
-                    We’re working hard to get WebSpeak Environment ready for everyone!
-                    While we wrap up the finishing touches, we’re adding people
+                    We’re working hard to get WebSpeak environment ready for everyone!
+                    While we wrap up the finishing youches, we’re adding people
                     gradually to make sure nothing breaks
                 </p>
-
                 <div>
                     <Button onClick={startRegister} text="Let's Go" />
                 </div>
-
                 <div className={styles.signinWrapper}>
-
                     <span className={styles.hasInvite}>
                         Have an invite text?
                     </span>
                 </div>
-
             </Card>
-
         </div>
     );
 };
