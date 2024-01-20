@@ -12,7 +12,10 @@ class ActivateController {
         }
 
         // Image Base64
-        const buffer = Buffer.from(avatar.replace(/^data:image\/png;base64,/, ''),'base64');
+        const buffer = Buffer.from(
+            avatar.replace(/^data:image\/(png|jpg|jpeg);base64,/, ''),
+            'base64'
+        );
         if (!buffer) {
             return res.status(400).json({ message: 'Invalid image data!' });
         }

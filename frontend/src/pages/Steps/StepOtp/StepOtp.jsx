@@ -1,4 +1,4 @@
- import React, { useState } from 'react';
+import React, { useState } from 'react';
 import Card from '../../../components/shared/Card/Card';
 import TextInput from '../../../components/shared/TextInput/TextInput';
 import Button from '../../../components/shared/Button/Button';
@@ -13,9 +13,9 @@ const StepOtp = () => {
     const dispatch = useDispatch();
     const { phone, hash } = useSelector((state) => state.auth.otp);
     async function submit() {
+        if (!otp || !phone || !hash) return;
         try {
             const { data } = await verifyOtp({ otp, phone, hash });
-            console.log(data);
             dispatch(setAuth(data));
         } catch (err) {
             console.log(err);
@@ -31,12 +31,12 @@ const StepOtp = () => {
                     <TextInput
                         value={otp}
                         onChange={(e) => setOtp(e.target.value)}
-                    /> 
+                    />
                     <div className={styles.actionButtonWrap}>
                         <Button onClick={submit} text="Next" />
                     </div>
                     <p className={styles.bottomParagraph}>
-                        By entering your OTP, you’re agreeing to our Terms of
+                        By entering your number, you’re agreeing to our Terms of
                         Service and Privacy Policy. Thanks!
                     </p>
                 </Card>
