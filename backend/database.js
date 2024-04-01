@@ -9,7 +9,7 @@ function DbConnect() {
         }
     )
     .then((x) => {
-        console.log("Connected to the DATABASE!!!");
+        console.log("CONNECTED TO THE DATABASE!!!");
     })
     .catch((err) => {
         console.log("Failed to connect with DB!!");
