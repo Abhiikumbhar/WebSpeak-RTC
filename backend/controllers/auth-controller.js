@@ -57,7 +57,7 @@ class AuthController {
                 user = await userService.createUser({ phone });
             }
         } catch (err) {
-            console.log(err);
+            console.log(err); 
             res.status(500).json({ message: 'Db error' });
         }
 
