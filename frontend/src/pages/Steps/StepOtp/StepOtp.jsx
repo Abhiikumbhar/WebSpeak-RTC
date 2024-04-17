@@ -18,7 +18,16 @@ const StepOtp = () => {
             const { data } = await verifyOtp({ otp, phone, hash });
             dispatch(setAuth(data));
         } catch (err) {
-            console.log(err);
+            const message = err.message.split(' ');
+            if(message[message.length-1]=== '403')
+            {
+                alert("Expired Otp");
+            }
+            if(message[message.length-1]=== '401')
+            {
+                alert("Invalid Otp");
+            }
+            console.log( err.message);
         }
     }
     return (

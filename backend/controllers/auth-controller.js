@@ -36,18 +36,21 @@ class AuthController {
     async verifyOtp(req, res) {
         const { otp, hash, phone } = req.body;
         if (!otp || !hash || !phone) {
-            res.status(400).json({ message: 'All fields are required!' });
+            res.status(401).json({ message: 'All fields are required!' });
+            return;
         }
 
         const [hashedOtp, expires] = hash.split('.');
         if (Date.now() > +expires) {
-            res.status(400).json({ message: 'OTP expired!' });
+            res.status(403).json({ message: 'OTP expired!' });
+            return;
         }
 
         const data = `${phone}.${otp}.${expires}`;
         const isValid = otpService.verifyOtp(hashedOtp, data);
         if (!isValid) {
-            res.status(400).json({ message: 'Invalid OTP' });
+            res.status(401).json({ message: 'Invalid OTP' });
+            return;
         }
 
         let user;
