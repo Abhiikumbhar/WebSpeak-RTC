@@ -17,7 +17,7 @@ class OtpService{
         return await twilio.messages.create({
             to: phone,
             from: process.env.SMS_FORM_NUMBER,
-            body: `Your WebSpeak One Time OTP is ${otp}`,
+            body: `Hey.. Your WebSpeak One Time OTP is ${otp} , Happy WebSpeaking!!`,
         })
     }
     
