@@ -74,7 +74,7 @@ const SemiProtectedRoute = ({ children, ...rest }) => {
                             state: { from: location },
                         }}
                     />
-                ) : isAuth && !user.activated ? (
+                ) : isAuth && !user?.activated ? (
                     children
                 ) : (
                     <Redirect
@@ -102,7 +102,7 @@ const ProtectedRoute = ({ children, ...rest }) => {
                             state: { from: location },
                         }}
                     />
-                ) : isAuth && !user.activated ? (
+                ) : isAuth && !user?.activated ? (
                     <Redirect
                         to={{
                             pathname: '/activate',

@@ -1,5 +1,5 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
+import React, { useEffect, useState } from 'react';
+import { Link, useHistory } from 'react-router-dom';
 import { logout } from '../../../http';
 import styles from './Navigation.module.css';
 import { useDispatch, useSelector } from 'react-redux';
@@ -18,19 +18,29 @@ const Navigation = () => {
     const logoText = {
         marginLeft: '10px',
     };
+    const history = useHistory();
     const dispatch = useDispatch();
+    const [isUser, setUser]= useState(true);
+
+    useEffect(function(){
+        if(!isUser){
+            history.push('/')
+        }
+    },[isUser])
+
     const { isAuth, user } = useSelector((state) => state.auth);
     async function logoutUser() {
         try {
             const { data } = await logout();
             dispatch(setAuth(data));
+            setUser(false);
         } catch (err) {
             console.log(err);
         }
     }
 
     return (
-        <nav className={`${styles.navbar} container`}>
+        user && <nav className={`${styles.navbar} container`}>
             <Link style={brandStyle} to="/">
                 <img src="/images/logo.png" alt="logo" />
                 <span style={logoText}>WebSpeak</span>
@@ -42,8 +52,8 @@ const Navigation = () => {
                         <img
                             className={styles.avatar}
                             src={
-                                user.avatar
-                                    ? user.avatar
+                                user?.avatar
+                                    ? user?.avatar
                                     : '/images/monkey-avatar.png'
                             }
                             width="40"

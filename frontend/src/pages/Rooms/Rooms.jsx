@@ -14,7 +14,7 @@ const Rooms = () => {
     useEffect(() => {
         const fetchRooms = async () => {
             const { data } = await getAllRooms();
-            console.log(data);
+            // console.log(data);
             const joinable = data.filter(data=>data.roomType === 'open' || data.roomType === "social")
             setRooms(joinable);
         };
@@ -32,10 +32,10 @@ const Rooms = () => {
                 <div className={styles.roomsHeader}>
                     <div className={styles.left}>
                         <span className={styles.heading}>All voice rooms</span>
-                        <div className={styles.searchBox}>
+                        {/* <div className={styles.searchBox}>
                             <img src="/images/search-icon.png" alt="search" />
                             <input type="text" className={styles.searchInput} />
-                        </div>
+                        </div> */}
                     </div>
                     <div className={styles.right}>
                         <button className={styles.startRoomButton} onClick={openJoin} >
