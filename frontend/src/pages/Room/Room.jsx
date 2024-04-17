@@ -51,11 +51,11 @@ const Room = () => {
             </div>
             <div className={styles.clientsWrap}>
                 <div className={styles.header}>
-                    {room && <h2 className={styles.topic}>{room.topic}</h2>}
+                    {room && <h2 className={styles.topic}>{room.topic}      |   UniqueId : {room._id}</h2>}
                     <div className={styles.actions}>
-                        <button className={styles.actionBtn}>
+                        {/* <button className={styles.actionBtn}>
                             <img src="/images/palm.png" alt="palm-icon" />
-                        </button>
+                        </button> */}
                         <button
                             onClick={handManualLeave}
                             className={styles.actionBtn}

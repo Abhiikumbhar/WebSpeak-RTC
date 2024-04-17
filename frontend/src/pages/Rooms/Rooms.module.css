@@ -10,6 +10,11 @@
     align-items: center;
 }
 
+.right{
+    display: flex;
+    gap: 1rem;
+}
+
 .heading {
     font-size: 20px;
     font-weight: bold;
