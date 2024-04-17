@@ -12,7 +12,6 @@ class AuthController {
         }
 
         const otp = await otpService.generateOtp();
-        // const otp = 7777;
 
         const ttl = 1000 * 60 * 2; // 2 min
         const expires = Date.now() + ttl;

@@ -26,11 +26,11 @@ const Home = () => {
                 <div>
                     <Button onClick={startRegister} text="Let's Go" />
                 </div>
-                <div className={styles.signinWrapper}>
+                {/* <div className={styles.signinWrapper}>
                     <span className={styles.hasInvite}>
                         Have an invite text?
                     </span>
-                </div>
+                </div> */}
             </Card>
         </div>
     );
