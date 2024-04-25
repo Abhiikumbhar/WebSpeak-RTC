@@ -20,10 +20,32 @@ const StepAvatar = ({ onNext }) => {
         const reader = new FileReader();
         reader.readAsDataURL(file);
         reader.onloadend = function () {
-            setImage(reader.result);
-            dispatch(setAvatar(reader.result));
+          const imageDataUrl = reader.result;
+          const image = new Image();
+          image.src = imageDataUrl;
+          image.onload = function () {
+            const canvas = document.createElement('canvas');
+            const ctx = canvas.getContext('2d');
+            const width = image.width;
+            const height = image.height;
+            const aspectRatio = width / height;
+            let cropWidth, cropHeight;
+            if (aspectRatio > 1) {
+              cropWidth = height;
+              cropHeight = height;
+            } else {
+              cropWidth = width;
+              cropHeight = width;
+            }
+            canvas.width = cropWidth;
+            canvas.height = cropHeight;
+            ctx.drawImage(image, (width - cropWidth) / 2, (height - cropHeight) / 2, cropWidth, cropHeight, 0, 0, cropWidth, cropHeight);
+            const croppedImageDataUrl = canvas.toDataURL();
+            setImage(croppedImageDataUrl);
+            dispatch(setAvatar(croppedImageDataUrl));
+          };
         };
-    }
+      }
     async function submit() {
         if (!name || !avatar) return;
         setLoading(true);
@@ -50,7 +72,7 @@ const StepAvatar = ({ onNext }) => {
     if (loading) return <Loader message="Activation in progress..." />;
     return (
         <>
-            <Card title={`Okay, ${name}`} icon="monkey-emoji">
+            <Card title={`Okay, ${name}`} >
                 <p className={styles.subHeading}>How’s this photo?</p>
                 <div className={styles.avatarWrapper}>
                     <img

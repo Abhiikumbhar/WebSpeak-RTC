@@ -40,7 +40,7 @@ const Rooms = () => {
                     <div className={styles.right}>
                         <button className={styles.startRoomButton} onClick={openJoin} >
                             <img
-                                src="/images/add-room-icon.png"
+                                src="/images/link-file.png"
                                 alt="add-room"
                             />
                             <span>Join Room</span>
@@ -53,7 +53,7 @@ const Rooms = () => {
                                 src="/images/add-room-icon.png"
                                 alt="add-room"
                             />
-                            <span>Start a room</span>
+                            <span>Start Room</span>
                         </button>
                     </div>
                 </div>

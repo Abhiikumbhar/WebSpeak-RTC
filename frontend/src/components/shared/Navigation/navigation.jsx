@@ -5,6 +5,15 @@ import styles from './Navigation.module.css';
 import { useDispatch, useSelector } from 'react-redux';
 import { setAuth } from '../../../store/authSlice';
 
+const Tooltip = ({ text, children }) => {
+    return (
+      <div className={styles.tooltipContainer}>
+        {children}
+        <span className={styles.tooltip}>{text}</span>
+      </div>
+    );
+  };
+  
 const Navigation = () => {
     const brandStyle = {
         color: '#fff',
@@ -65,7 +74,9 @@ const Navigation = () => {
                         className={styles.logoutButton}
                         onClick={logoutUser}
                     >
+                        <Tooltip text="Logout">
                         <img src="/images/logout.png" alt="logout" />
+                        </Tooltip>
                     </button>
                 </div>
             )}

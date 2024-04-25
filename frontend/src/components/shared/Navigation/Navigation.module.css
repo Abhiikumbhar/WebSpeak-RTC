@@ -22,3 +22,25 @@
     margin: 0 20px;
     margin-right: 10px;
 }
+
+
+.tooltipContainer {
+    position: relative;
+  }
+  
+  .tooltip {
+    position: absolute;
+    top: 100%;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: #333;
+    color: #fff;
+    padding: 5px 10px;
+    border-radius: 5px;
+    font-size: 12px;
+    display: none;
+  }
+  
+  .tooltipContainer:hover .tooltip {
+    display: block;
+  }
