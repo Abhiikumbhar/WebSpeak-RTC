@@ -12,10 +12,27 @@ const Phone = ({ onNext }) => {
     const dispatch = useDispatch();
 
     async function submit() {
-        const { data } = await sendOtp({ phone: phoneNumber });
-        console.log(data);
-        dispatch(setOtp({ phone: data.phone, hash: data.hash }));
-        onNext();
+        if(!phoneNumber){
+            alert("Phone field is required");
+            return;
+        }
+        if (phoneNumber.length !== 10) {
+            alert("Please enter a 10-digit phone number.");
+            return;
+        }
+        try{
+            const { data } = await sendOtp({ phone: phoneNumber });
+            console.log("Data from phone.jsx", data);
+            dispatch(setOtp({ phone: data.phone, hash: data.hash }));
+            onNext();
+        }catch(err){
+            const message = err.message.split(' ');
+            if(message[message.length-1]=== '401')
+            {
+                alert("Phone field is required! ");
+            }
+            console.log( err.message);
+        }
     }
 
     return (

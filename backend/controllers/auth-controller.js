@@ -8,7 +8,7 @@ class AuthController {
     async sendOtp(req, res) {
         const { phone } = req.body;
         if (!phone) {
-            res.status(400).json({ message: 'Phone field is required!' });
+            res.status(401).json({ message: 'Phone field is required!' });
         }
 
         const otp = await otpService.generateOtp();
