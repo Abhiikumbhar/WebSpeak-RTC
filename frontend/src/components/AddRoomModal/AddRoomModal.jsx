@@ -8,11 +8,12 @@ const AddRoomModal = ({ onClose }) => {
 
     const [roomType, setRoomType] = useState('open');
     const [topic, setTopic] = useState('');
+    const [isDeletable, setisDeletable] = useState(false);
 
     async function createRoom() {
         try {
             if (!topic) return;
-            const { data } = await create({ topic, roomType });
+            const { data } = await create({ topic, roomType, isDeletable  });
             history.push(`/room/${data.id}`);
         } catch (err) {
             console.log(err.message);
@@ -64,6 +65,19 @@ const AddRoomModal = ({ onClose }) => {
                             <span>Private</span>
                         </div>
                     </div>
+                     {/* Checkbox */}
+                    <h2 className={styles.subHeading}>Room Duration</h2>
+                    <div className={styles.checkboxContainer}>
+                        <label htmlFor="checkbox" className={styles.checkboxLabel}>
+                            <input
+                                type="checkbox"
+                                id="checkbox"
+                                checked={isDeletable}
+                                onChange={(e) => setisDeletable(e.target.checked)}
+                            />
+                            <span className={styles.checkboxText}> Automatically Delete After 1 month</span>
+                        </label>
+                    </div>
                 </div>
                 <div className={styles.modalFooter}>
                     <h2>Start a room, open to everyone</h2>
@@ -71,7 +85,7 @@ const AddRoomModal = ({ onClose }) => {
                         onClick={createRoom}
                         className={styles.footerButton}
                     >
-                        <img src="/images/celebration.png" alt="celebration" />
+                        <img src="/images/add-room-icon.png" alt="add-Room" />
                         <span>Let's go</span>
                     </button>
                 </div>

@@ -5,6 +5,7 @@ class RoomDto {
     speakers;
     ownerId;
     createdAt;
+    isDeletable;
 
     constructor(room) {
         this.id = room._id;
@@ -13,6 +14,7 @@ class RoomDto {
         this.ownerId = room.ownerId;
         this.speakers = room.speakers;
         this.createdAt = room.createdAt;
+        this.isDeletable = room.isDeletable;
     }
 }
 module.exports = RoomDto;

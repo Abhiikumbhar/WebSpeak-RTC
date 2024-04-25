@@ -6,6 +6,7 @@ const roomSchema = new Schema(
         topic: { type: String, required: true },
         roomType: { type: String, required: true },
         ownerId: { type: Schema.Types.ObjectId, ref: 'User' },
+        isDeletable: { type: Boolean, default: false },
         speakers: {
             type: [
                 {

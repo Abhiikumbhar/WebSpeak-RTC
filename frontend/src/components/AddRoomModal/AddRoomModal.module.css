@@ -90,3 +90,22 @@
     top: 8px;
     background: none;
 }
+
+
+.checkboxContainer {
+    margin-top: 20px; /* Adjust the margin as needed */
+    display: flex;
+    align-items: center;
+}
+
+.checkboxLabel {
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+}
+
+.checkboxLabel input[type="checkbox"] {
+    margin-right: 15px; /* Space between checkbox and text */
+}
+
+
